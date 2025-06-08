@@ -9,8 +9,8 @@ public class UserService {
     
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
- 
-    
+
+
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -25,7 +25,7 @@ public class UserService {
             throw new IllegalArgumentException("Email already exists.");
         }
 
-        UserEntity user = UserEntity.builder().username(request.getUsername()).email(request.getEmail()).passwordHash(request.getPassword()).role(Role.valueOf(request.getRole().toUpperCase())).build();
+        UserEntity user = UserEntity.builder().username(request.getUsername()).email(request.getEmail()).passwordHash(request.getPassword()).role(Role.valueOf(request.getRole().toUpperCase().trim())).build();
 
         userRepository.save(user);
     }
